@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>条件渲染</title>
+</head>
+
+<body>
+    <!--
+        条件渲染指令
+        v-if
+        v-else：直接从内存中移除
+        v-show：通过样式隐藏
+        比较：v-if和v-show,频繁切换建议v-show,因为v-show只是隐藏，并没有将元素移除出内存，这样我们再要显示的话就会快一点。
+    -->
+    <div id="demo">
+        <p v-if="ok">成功</p>
+        <p v-else>失败</p>
+        <p v-show="ok">row</p>
+        <p v-show="!ok">colum</p>
+        <button @click="ok=!ok">切换</button>
+    </div>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el:'#demo',
+            data:{
+                ok:false,
+            },
+        })
+    </script>
+</body>
+
+</html>

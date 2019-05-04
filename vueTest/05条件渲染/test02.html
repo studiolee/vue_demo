@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--
+        v-if与v-show的另外一点差别，就是v-if支持template,而v-show不支持
+        用 key 管理可复用的元素；key值不同的元素不会被复用
+    -->
+    <div id="demo">
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email">
+        </template>
+        <button @click="change">切换</button>
+    </div>
+
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el:'#demo',
+            data:{
+                loginType:'username'
+            },
+            methods: {
+                change(){
+                   if(this.loginType == 'username'){
+                       this.loginType = 'email'
+                   }else{
+                       this.loginType = 'username'
+                   }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

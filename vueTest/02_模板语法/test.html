@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <p>双大括号表达式</p>
+        <p>{{msg}}</p><!--textContext-->
+        <p>{{msg.toUpperCase()}}</p>
+        <p v-text="exp"></p><!--textContext-->
+        <p v-html="exp"></p><!--innerHTML-->
+        <p>指令1：强制数据绑定</p>
+        <img v-bind:src="imgUrl" alt="浏览器不支持">
+        <img :src="imgUrl" alt="浏览器不支持"><!--简写-->
+        <p>指令2：指定事件监听</p>
+        <button v-on:click="test">点我</button>
+        <button @click="test2(exp')">点我</button>
+    </div>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+        //创建vue实例
+        const vm = new Vue({//配置对象
+            el: '#app',//element：选择器
+            data: {//数据：model
+                msg:'we will be back',
+                exp:'<a href="http://www.baidu.com">百度</a>',
+                imgUrl:'https://vuejs.bootcss.com/images/logo.png'
+            },
+            methods: {
+                test(){
+                    alert('hehe!')
+                },
+                test2(content){
+                    alert(content)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

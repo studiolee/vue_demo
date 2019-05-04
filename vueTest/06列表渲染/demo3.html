@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>一个对象地v-for</title>
+</head>
+
+<body>
+    <!--
+        你也可以用 v-for 通过一个对象的属性来迭代。
+        
+        你也可以提供第二个的参数为键名,第三个参数为索引,
+
+        在遍历对象时，是按 Object.keys() 的结果遍历，但是不能保证它的结果在不同的 JavaScript 引擎下是一致的。
+
+    -->
+    <ul id="demo">
+        <li v-for="value in object">
+            {{ value }}
+        </li>
+        <li v-for="(value, key,index) in object">
+            {{index}}-{{ key }}: {{ value }}
+        </li>
+    </ul>
+
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#demo',
+            data: {
+                object: {
+                    firstName: 'John',
+                    lastName: 'Doe',
+                    age: 30
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

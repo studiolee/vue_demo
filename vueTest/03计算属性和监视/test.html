@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性和监视</title>
+</head>
+
+<body>
+    <!--
+        1.计算属性computed
+        2.监视属性watch
+        3.get与set
+        4.缓存
+    -->
+    <div id="demo">
+        姓：<input type="text" placeholder="first name" v-model="firstName"><br>
+        名：<input type="text" placeholder="last name" v-model="lastName"><br>
+        姓名(单向)：<input type="text" placeholder="full name" v-model="fullName1"><br>
+        姓名(单向)：<input type="text" placeholder="full name" v-model="fullName2"><br>
+        姓名(双向)：<input type="text" placeholder="full name" v-model="fullName3"><br>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+    </div>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#demo',
+            data: {
+                firstName: 'A',
+                lastName: 'B',
+                fullName2: 'A B',
+            },
+            computed: {//计算属性
+                //计算属性中的一个方法，方法的返回值作属性值
+                //什么时候执行？初始化/相关属性改变
+                fullName1() {
+                    console.log('fullName1');
+                    
+                    return this.firstName + ' ' + this.lastName
+                },
+                fullName3: {
+                    get() {//回调函数（自己定义，自己不调，但它最终执行了）
+                        //当相关属性值发生变化时，计算fullName3并返回
+                        return this.firstName + ' ' + this.lastName
+                    },
+                    //回调函数，当属性值发生改变时回调,监视当前属性值的变化
+                    set(value) {//value就是输入框传进来的数据
+                        const names = value.split(' ')
+                        this.firstName = names[0]
+                        this.lastName = names[1]
+                    }
+                    //计算属性存在缓存，多次读取只执行1次get
+                }
+            },
+            watch: {//监视属性
+                firstName: function (value) {
+                    this.fullName2 = value + ' ' + this.lastName
+                },
+                // lastName:function(value){
+                //     this.fullName2 = this.firstName +' '+ value
+                // }
+            },
+        })
+        vm.$watch('lastName', function (value) {
+            this.fullName2 = this.firstName + ' ' + value
+        })
+    </script>
+</body>
+
+</html>
