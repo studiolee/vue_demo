@@ -20,8 +20,8 @@
         所以你需要用 v-bind 来绑定动态值
     -->
     <ul id="demo">
-        <li v-for="item in items" :key="item.id">
-            {{ item.message }}----{{item.id}}
+        <li v-for="(item,index) in items" :key="index">
+            {{ item.message }}----{{index}}
         </li>
     </ul>
     <script type="text/javascript" src="../js/vue.js"></script>

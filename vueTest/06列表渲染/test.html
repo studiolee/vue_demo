@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    li{
+        color: aquamarine
+    }
+    </style>
+</head>
+<body>
+    <ul id="demo">
+        <li v-for="(p, index) in persons" :key="index">
+            {{p.name}}--{{p.age}}--{{index}}
+            <button @click="deleteP(index)">删除</button>
+            <button @click="updateP(index,{name:'Uturol',age:32})">更新</button>
+        </li>
+    </ul>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#demo',
+            data: {
+                persons: [//vue本身只是监视persons的变化，对于数组内部的变化，它并不监视
+                          //vue重写了数组中一系列改变数组内部数据的方法(先调用原生，更新界面)数组内部改变，界面自动变化。
+                    { name: 'tom' ,age:19},
+                    { name: 'king' ,age:20},
+                    { name: 'barbe' ,age:29},
+                    { name: 'tole' ,age:27},
+                ]
+            },
+            methods: {
+                deleteP(index){
+                    this.persons.splice(index,1)
+                },
+
+                updateP(index,newP){
+                  // this.persons[index] = newP//没有改变persons的本身，也没有调用变异方法,vue不知道。
+                  this.persons.splice(index,1,newP)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
